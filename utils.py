@@ -5,9 +5,6 @@ from transformers import GPT2Model, GPT2Tokenizer
 from pymongo import MongoClient
 from dotenv import load_dotenv, find_dotenv
 
-load_dotenv(find_dotenv())
-
-
 def get_relevant_answer_from_pinecone(user_input):
     """
     Retrieves the most relevant answer from Pinecone index based on the user input.
@@ -53,6 +50,7 @@ def get_qna_by_id_from_mongodb(id):
     Returns:
         str: The answer associated with the provided ID.
     """
+    load_dotenv(find_dotenv())
     client = MongoClient(os.getenv('MONGO_CONNECTION_STRING'))
     db = client['patient-qna']
     collection = db['qna-pairs']
